@@ -1,22 +1,89 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+import "../styles/global.css";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import ScrollToTop from "../components/ScrollToTop.astro";
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="font-outfit bg-white dark:bg-dark-page text-gray-900 dark:text-dark-text antialiased"
+  >
+    <!-- Fondo decorativo simplificado -->
+    <div class="fixed inset-0 -z-10">
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-gray-50 to-white dark:from-dark-surface dark:to-dark-page"
+      >
+      </div>
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_-100px,rgba(59,130,246,0.05),transparent)] dark:bg-[radial-gradient(circle_800px_at_50%_-100px,rgba(29,78,216,0.15),transparent)]"
+      >
+      </div>
+    </div>
+
+    <slot />
+    <ScrollToTop />
+
+    <!-- Cursor personalizado -->
+    <div
+      id="cursor"
+      class="hidden md:block fixed w-4 h-4 pointer-events-none z-50"
+    >
+      <div class="cursor-dot"></div>
+      <div class="cursor-outline"></div>
+    </div>
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  .cursor-dot {
+    @apply w-2 h-2 bg-primary-600 dark:bg-primary-500 rounded-full fixed transition-transform duration-100 ease-out;
+  }
+
+  .cursor-outline {
+    @apply w-8 h-8 border-2 border-primary-600/50 dark:border-primary-500/50 rounded-full fixed transition-transform duration-300 ease-out;
+    transform: translate(-25%, -25%);
+  }
 </style>
+
+<script>
+  // Cursor personalizado
+  const cursor = document.getElementById("cursor");
+  const cursorDot = cursor?.querySelector(".cursor-dot") as HTMLElement;
+  const cursorOutline = cursor?.querySelector(".cursor-outline") as HTMLElement;
+
+  window.addEventListener("mousemove", (e) => {
+    if (cursorDot && cursorOutline) {
+      cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      cursorOutline.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    }
+  });
+
+  // Efecto hover en enlaces
+  document.querySelectorAll("a, button").forEach((element) => {
+    element.addEventListener("mouseenter", () => {
+      cursorOutline?.classList.add("scale-150");
+    });
+    element.addEventListener("mouseleave", () => {
+      cursorOutline?.classList.remove("scale-150");
+    });
+  });
+</script>
