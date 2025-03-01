@@ -1,0 +1,95 @@
+---
+import { Image } from "astro:assets";
+
+// Imagen hero desde Unsplash
+const heroImage =
+  "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80";
+---
+
+<section class="relative min-h-screen flex items-center overflow-hidden">
+  <div class="absolute inset-0 -z-10">
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40 animate-gradient"
+    >
+    </div>
+    <div class="absolute inset-0 backdrop-blur-[1px]"></div>
+  </div>
+
+  <div class="container mx-auto px-4 py-20">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-8 text-center lg:text-left">
+        <h1 class="text-4xl md:text-6xl font-bold">
+          Innovación en
+          <span
+            class="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-transparent bg-clip-text animate-shine inline-block"
+          >
+            Publicidad Visual
+          </span>
+        </h1>
+        <p class="text-xl text-gray-700 dark:text-gray-300">
+          Especialistas en soluciones publicitarias de alto impacto.
+          Transformamos espacios con diseños innovadores en acrílico, impresión
+          digital y branding corporativo.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+          <a
+            href="#servicios"
+            class="px-8 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full transition-all hover:scale-105 hover:shadow-lg"
+          >
+            Explorar Servicios
+          </a>
+          <a
+            href="#contacto"
+            class="px-8 py-3 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-white rounded-full transition-all hover:scale-105"
+          >
+            Solicitar Cotización
+          </a>
+        </div>
+      </div>
+      <div class="relative animate-float">
+        <div
+          class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur-2xl opacity-30 dark:opacity-40"
+        >
+        </div>
+        <div class="relative">
+          <img
+            src={heroImage}
+            alt="Diseño publicitario creativo"
+            width={600}
+            height={400}
+            class="rounded-2xl shadow-2xl object-cover w-full h-full"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg
+      class="w-full h-24 text-white dark:text-dark-bg"
+      viewBox="0 0 1440 100"
+      fill="currentColor"
+      preserveAspectRatio="none"
+    >
+      <path d="M0,0 C480,100 960,100 1440,0 L1440,100 L0,100 Z"></path>
+    </svg>
+  </div>
+</section>
+
+<script>
+  import Swiper from "swiper";
+  import { Autoplay, Pagination } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/pagination";
+
+  const swiper = new Swiper(".swiper", {
+    modules: [Autoplay, Pagination],
+    loop: true,
+    autoplay: {
+      delay: 5000,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+    },
+  });
+</script>
